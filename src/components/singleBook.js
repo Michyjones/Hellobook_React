@@ -62,6 +62,7 @@ class singleBook extends Component{
                         <th className="hidden-xs">Availability</th>
                     </tr>
                     </thead>
+                    <tbody>
                     <td >{book.id}</td>
                 <td >{book.serial_no}</td>
                 <td>{book.book_name}</td>
@@ -69,6 +70,7 @@ class singleBook extends Component{
                 <td> {book.availabilty?
                         <b className="text-success">Available</b>:<b className="text-danger">Not Available</b>
                     }</td>
+                    </tbody>
                 </table>:
 
                 <h4>Loading ...</h4>}

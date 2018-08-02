@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import '../App.css';
-import {Navbar, Nav} from 'react-bootstrap'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
 
 class Header extends Component {
   render() {
     return (
-
+      <div>
         <Navbar default collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
@@ -17,22 +17,28 @@ class Header extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-              <li><Link to="/home">Home</Link>
-              </li>
-
-              <li><Link to="/view">About</Link>
-              </li>
+            <NavItem>
+              <Link to="/home">Home</Link>
+              </NavItem>
+              <NavItem>
+              <Link to="/view">About</Link>
+              </NavItem>
           </Nav>
           <Nav pullRight>
-              <li><Link to="/login">Login</Link>
-              </li>
-
-              <li><Link to="/">Register</Link>
-              </li>
+          <NavItem>
+              <Link to="/login">Login</Link>
+              
+              </NavItem>
+              <NavItem>
+              <Link to="/">Register</Link>
+              <Link to="/">Logout</Link>
+            
+              </NavItem>
 
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      </div>
     );
   }
 }
