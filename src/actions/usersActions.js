@@ -12,7 +12,6 @@ export const createUser = (user) => {
         axios.post(`${basePath}/auth/register`, user).then( user =>
             dispatch({type: CREATE_USER_SUCCESS, user})
         ).catch(error => {
-            console.log('error', error.response.data);
             dispatch({type: ERRORHANDLER, error:error.response.data.Message || error.response.data.Error })
         })
     );
@@ -26,8 +25,6 @@ export const loginUser = (user) => {
 
             }
         ).catch(error => {
-            console.log('error', error.response.data);
-
             dispatch({type: ERRORHANDLER, error:error.response.data.Message || error.response.data.Error })
         })
     );

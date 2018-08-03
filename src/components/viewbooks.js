@@ -48,7 +48,7 @@ class Views extends Component{
                                         <table className="table table-striped table-bordered table-list">
                                             <thead>
                                             <tr>
-                                                <th><em className="fa fa-cog"></em></th>
+                                            
                                                 <th>Status</th>
                                                 <th className="hidden-xs">Serial No</th>
                                                 <th> Book Name</th>
@@ -59,14 +59,7 @@ class Views extends Component{
                                             <tbody>
                                             {books.books.map((book)=>(
                                             <tr>
-                                                <td align="center">
-                                                    <div className="btn-group">
-                                                        {/*<a className="btn btn-primary"><em*/}
-                                                            {/*className="fa fa-pencil"></em></a><Link to="/editbook">X</Link>*/}
-                                                        {/*<a className="btn btn-danger"></i></a>*/}
-                                                        <button onClick={()=>alert(book.id)}><a className="btn btn-danger"><i className="fa fa-trash"></i></a></button>
-                                                    </div>
-                                                </td>
+                                
                                                 <td>
                                                     <Link
                                                     to={`/book/${book.id}`}

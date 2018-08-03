@@ -15,6 +15,7 @@ import Home from "./components/home";
 import addbook from "./components/addbook"
 import editbook from "./components/editbook"
 import singleBook from "./components/singleBook";
+import History from "./components/History"
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
                   <Route path="/addbook" component={addbook}/>
                   <Route path="/editbook/:id" component={editbook}/>
                   <Route exact path="/book/:id" component={singleBook}/>
+                  <Route path="/history" component={History}/>
 
               </div>
             </Router>
