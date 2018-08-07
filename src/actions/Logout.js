@@ -23,7 +23,6 @@ export const logoutUser = user => {
         // this.props.history.push("/login");
       })
       .catch(error => {
-          console.log('---------->>>', error.response)
           const Message = error.response.data.Message;
         if (error.response.status === 401) {
           dispatch({

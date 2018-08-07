@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginUser } from "../actions/usersActions";
-// import {browserHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 //import {bindActionCreators} from "redux";
 import { connect } from "react-redux";
 import Header from "./Header";

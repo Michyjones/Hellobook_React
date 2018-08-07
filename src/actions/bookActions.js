@@ -56,6 +56,7 @@ export const editBook = data => {
 };
 export const fetchBooks = dispatch => {
   dispatch({ type: FETCHING_BOOKS });
+  let token = localStorage.getItem("token");
   axios
     .get(`${basePath}/books`, { headers: { Authorization: "Bearer " + token } })
     .then(response => {
