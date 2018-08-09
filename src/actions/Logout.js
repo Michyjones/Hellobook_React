@@ -1,8 +1,10 @@
 import { LOGOUT_SUCCESS, ERRORHANDLER } from "./actionTypes";
 import axios from "axios";
 import swal from "sweetalert";
+import { redirect } from "../helpers/history"
 
-const basePath = "http://localhost:5000/api/v2";
+
+const basePath =process.env.REACT_APP_base_path;
 const token = localStorage.getItem("token");
 
 export const logoutUser = user => {
@@ -18,9 +20,9 @@ export const logoutUser = user => {
       .then(resp => {
         const Message = resp.data.Message;
         dispatch({ type: LOGOUT_SUCCESS, data : {Message }});
-        localStorage.removeItem("token");
+        localStorage.clear();
         swal("Success", Message);
-        // this.props.history.push("/login");
+        redirect("/login");
       })
       .catch(error => {
           const Message = error.response.data.Message;
@@ -30,8 +32,10 @@ export const logoutUser = user => {
             error: error.response.data.Message || error.response.data.Error
             
           });
-          localStorage.removeItem("token");
+          localStorage.clear();
           swal("Error", Message);
+          redirect("/login");
+
         } else if (error.response.status === 400) {
         const Message = error.response.data.Message;
           dispatch({

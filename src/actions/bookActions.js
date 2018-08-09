@@ -8,11 +8,14 @@ import {
   GET_SINGLE_BOOK,
   GET_HISTORY,
   GET_HISTORY_SUCCESS,
-  FETCHING_HISTORY_ERROR
+  FETCHING_HISTORY_ERROR,
+  DELETE_BOOK_SUCCESS
 } from "./actionTypes";
 import axios from "axios";
+import swal from "sweetalert"
 
-const basePath = "http://localhost:5000/api/v2";
+
+const basePath =process.env.REACT_APP_base_path;
 const token = localStorage.getItem("token");
 
 export const addBook = book => {
@@ -42,14 +45,41 @@ export const editBook = data => {
       .then(result => {
         const Message = result.data.Message;
         dispatch({ type: EDIT_BOOK_SUCCESS, Message });
+        swal("Success",Message)
       })
       .catch(error => {
         if (error.response.status === 404) {
-          console.log(error.response);
           dispatch({
             type: ERRORHANDLER,
             data: error.response.data.Message || error.response.data.Error
           });
+        }
+      });
+  };
+};
+export const deleteBook = data => {
+  return dispatch => {
+    let token = data.token;
+    console.log("---------->>>>>> ", data)
+    axios
+      .delete(`${basePath}/books/${data.book_id}`, {}, {
+        headers: { Authorization: "Bearer " + data.token }
+      })
+      .then(result => {
+        console.log("@@@@@@@@@@@@@ ", result.data)
+        const Message = result.data.Message;
+        dispatch({ type: DELETE_BOOK_SUCCESS, Message }); 
+        swal("Success",Message)
+
+      })
+      .catch(error => {
+        const Message = error.response.data.Message;
+        if (error.response.status === 404) {
+          dispatch({
+            type: ERRORHANDLER,
+            data: error.response.data.Message || error.response.data.Error
+          });
+          swal( "Error",Message)
         }
       });
   };
