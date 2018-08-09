@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "../styles/Login.css";
+import "../styles/Login.css";
 import { getSingleBook } from "../actions/bookActions";
 import { borrowBook, returnBook } from "../actions/BorrowReturnActions";
 
@@ -69,57 +69,65 @@ class singleBook extends Component {
         <div className="container">
           {book ? (
             <Fragment>
-              <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="success">
-                  Filter History
-                </DropdownToggle>
-                <DropdownMenu>
-                  <div>
-                    <DropdownItem onClick={this._borrowBook}>
-                      Borrow Book
-                    </DropdownItem>
-                    <DropdownItem onClick={this._returnBook}>
-                      Returned Book
-                    </DropdownItem>
+              <div id="rowj">
+                <div className="row">
+                  <div className="col-sm-8">
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Book Name</th>
+                          <th scope="col">serial number</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">
+                            <Dropdown
+                              isOpen={this.state.dropdownOpen}
+                              toggle={this.toggle}
+                            >
+                              <DropdownToggle caret color="success">
+                                Book Actions
+                              </DropdownToggle>
+                              <DropdownMenu>
+                                <DropdownItem onClick={this._borrowBook}>
+                                  Borrow Book
+                                </DropdownItem>
+
+                                <DropdownItem onClick={this._returnBook}>
+                                  Return Book
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </Dropdown>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">{}</th>
+                          <td>{book.book_name}</td>
+                          <td>{book.serial_no}</td>
+                          <td>{book.category}</td>
+                          <td>
+                            {" "}
+                            {book.availabilty ? (
+                              <b className="text-success">Available</b>
+                            ) : (
+                              <b className="text-danger">Not Available</b>
+                            )}
+                          </td>
+                          <td>
+                            <center>
+                              <div type="button" className="btn btn-danger">
+                                Delete
+                              </div>
+                            </center>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                </DropdownMenu>
-              </Dropdown>
-              <div className="row">
-                <div className="col-sm-6">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <td>Book ID</td>
-                        <td>{book.id}</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Book Name</td>
-                        <td>{book.book_name}</td>
-                      </tr>
-                      <tr>
-                        <td>Serial Number</td>
-                        <td>{book.serial_no}</td>
-                      </tr>
-                      <tr>
-                        <td>Category</td>
-                        <td>{book.category}</td>
-                      </tr>
-                      <tr>
-                      <td>Status</td>
-                  {" "}
-                  {book.availabilty ? (
-                    <b className="text-success">Available</b>
-                  ) : (
-                    <b className="text-danger">Not Available</b>
-                  )}
-                </tr>
-                    </tbody>
-                  </table>
                 </div>
               </div>
-              
             </Fragment>
           ) : (
             <h4>Loading ...</h4>

@@ -31,8 +31,6 @@ class Createbook extends Component {
   render() {
     const { updateBookState, submitForm } = this;
     const { serial_no, book_name, category } = this.state.book;
-    console.log(this.props.book);
-
     return (
       <Fragment>
         <Header />

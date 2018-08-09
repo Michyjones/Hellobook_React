@@ -1,33 +1,43 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginUser } from "../actions/usersActions";
-import {browserHistory} from 'react-router';
-//import {bindActionCreators} from "redux";
 import { connect } from "react-redux";
 import Header from "./Header";
+import { redirect } from "../helpers/history"
+import {Redirect } from 'react-router'
+
 
 class Login extends Component {
   state = {
     user: {
       email: "",
       password: ""
+     
+    },
+    loggedIn: false
+  };
+  componentWillReceiveProps(nextProps){
+    if(nextProps.user !== this.props.user){
+      this.setState({loggedIn: nextProps.user.loggedIn});
     }
   };
+  
   updateUserState = (field, e) => {
     let newUserState = Object.assign({}, this.state.user);
     newUserState[field] = e.target.value;
     this.setState({ user: newUserState });
   };
 
+
   submitForm = () => {
     this.props.loginNewUser(this.state.user);
-    this.props.history.push("/view");
   };
 
   render() {
     const { updateUserState, submitForm } = this;
-    const { email, password } = this.state.user;
-    return (
+    const { user: { email, password }, loggedIn }= this.state;
+    
+    return loggedIn ? <Redirect to="/view"/> : (
       <Fragment>
         <Header />
         <div className="container">
