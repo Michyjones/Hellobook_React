@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.css";
 import Register from "./components/RegisterForm";
 import Login from "./components/LoginForm";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route} from "react-router-dom";
 import {Provider} from 'react-redux';
 import store from './store';
 import Views from "./components/viewbooks";
@@ -16,6 +16,7 @@ import addbook from "./components/addbook"
 import editbook from "./components/editbook"
 import singleBook from "./components/singleBook";
 import History from "./components/History"
+import NoMatch from "./components/NoMatch"
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
             {/*<Header />*/}
             <Router>
               <div>
+                <Switch>
                 <Route exact path="/" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/view" component={Views}/>
@@ -34,7 +36,8 @@ class App extends Component {
                   <Route path="/editbook/:id" component={editbook}/>
                   <Route exact path="/book/:id" component={singleBook}/>
                   <Route path="/history" component={History}/>
-
+                  <Route component={NoMatch}/>
+              </Switch>
               </div>
             </Router>
           </div>
