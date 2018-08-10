@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
+import { Link } from "react-router-dom";
 import { getSingleBook } from "../actions/bookActions";
 import { borrowBook, returnBook } from "../actions/BorrowReturnActions";
 
@@ -34,7 +35,6 @@ class singleBook extends Component {
   _getSingleBook = () => {
     const book_id = this.props.match.params.id;
     const token = localStorage.getItem("token");
-    // let book = this.props;
     this.props.getSingleBook({ book_id, token });
   };
   _borrowBook = () => {
@@ -72,59 +72,59 @@ class singleBook extends Component {
               <div id="rowj">
                 <div className="row">
                   <div className="col-sm-8">
-                    <table className="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Book Name</th>
-                          <th scope="col">serial number</th>
-                          <th scope="col">Category</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">
-                            <Dropdown
-                              isOpen={this.state.dropdownOpen}
-                              toggle={this.toggle}
-                            >
-                              <DropdownToggle caret color="success">
-                                Book Actions
-                              </DropdownToggle>
-                              <DropdownMenu>
-                                <DropdownItem onClick={this._borrowBook}>
-                                  Borrow Book
-                                </DropdownItem>
+                    <div style={{ backgroundColor: "white" }}>
+                      <table className="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">serial number</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">
+                              <Dropdown
+                                isOpen={this.state.dropdownOpen}
+                                toggle={this.toggle}
+                              >
+                                <DropdownToggle caret color="success">
+                                  Book Actions
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                  <DropdownItem onClick={this._borrowBook}>
+                                    Borrow Book
+                                  </DropdownItem>
 
-                                <DropdownItem onClick={this._returnBook}>
-                                  Return Book
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </Dropdown>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">{}</th>
-                          <td>{book.book_name}</td>
-                          <td>{book.serial_no}</td>
-                          <td>{book.category}</td>
-                          <td>
-                            {" "}
-                            {book.availabilty ? (
-                              <b className="text-success">Available</b>
-                            ) : (
-                              <b className="text-danger">Not Available</b>
-                            )}
-                          </td>
-                          <td>
-                            <center>
-                              <div type="button" className="btn btn-danger">
-                                Delete
-                              </div>
-                            </center>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                                  <DropdownItem onClick={this._returnBook}>
+                                    Return Book
+                                  </DropdownItem>
+                                  <DropdownItem>
+                                    <Link to="/history">History</Link>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </Dropdown>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">{}</th>
+                            <td>{book.book_name}</td>
+                            <td>{book.serial_no}</td>
+                            <td>{book.category}</td>
+                            <td>
+                              {" "}
+                              {book.availabilty ? (
+                                <b className="text-success">Available</b>
+                              ) : (
+                                <b className="text-danger">Not Available</b>
+                              )}
+                            </td>
+                            <td>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>

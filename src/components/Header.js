@@ -12,7 +12,7 @@ class Header extends Component {
         <Navbar default collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/home">Hello Books</a>
+              <Link to="/home">Hello Books</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -43,6 +43,8 @@ class Header extends Component {
               </Fragment>:
               <NavItem>
               <button onClick={this.props.logoutUser}>Logout</button>
+              <br/>
+              <Link to="/changepassword">Change Password</Link>
             </NavItem> }
             </Nav>
           </Navbar.Collapse>
