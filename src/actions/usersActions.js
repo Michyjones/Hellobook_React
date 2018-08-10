@@ -23,8 +23,8 @@ export const loginUser = (user) => {
 
     return dispatch => {
         return axios.post(`${basePath}/auth/login`, user).then( user => {console.log(user)
-            const token = user.data.token;
-            const IsAdmin = user.data.IsAdmin;
+                const token = user.data.token;
+                const IsAdmin = user.data.IsAdmin;
                 localStorage.setItem("token", token)
                 // localStorage.setItem("IsAdmin", IsAdmin)
                 localStorage.setItem("loggedIn", true)
