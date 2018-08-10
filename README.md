@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/Michyjones/Hellobook_React.svg?branch=develop)](https://travis-ci.org/Michyjones/Hellobook_React)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/180303ee13d81773a004/maintainability)](https://codeclimate.com/github/Michyjones/Hellobook_React/maintainability)
-
 [![Coverage Status](https://coveralls.io/repos/github/Michyjones/Hellobook_React/badge.svg?branch=master)](https://coveralls.io/github/Michyjones/Hellobook_React?branch=master)
 # Hello_books_Frontend
 
