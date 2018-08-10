@@ -12,7 +12,8 @@ import {
   DELETE_BOOK_SUCCESS
 } from "./actionTypes";
 import axios from "axios";
-import swal from "sweetalert"
+import swal from "sweetalert";
+import { redirect } from "../helpers/history";
 
 
 const basePath =process.env.REACT_APP_base_path;
@@ -60,16 +61,16 @@ export const editBook = data => {
 export const deleteBook = data => {
   return dispatch => {
     let token = data.token;
-    console.log("---------->>>>>> ", data)
+    axios.defaults.headers.common["Authorization"] = "Bearer "+ data.token;
     axios
       .delete(`${basePath}/books/${data.book_id}`, {}, {
-        headers: { Authorization: "Bearer " + data.token }
       })
       .then(result => {
-        console.log("@@@@@@@@@@@@@ ", result.data)
         const Message = result.data.Message;
         dispatch({ type: DELETE_BOOK_SUCCESS, Message }); 
-        swal("Success",Message)
+        swal("Success",Message);
+        redirect("/view");
+
 
       })
       .catch(error => {

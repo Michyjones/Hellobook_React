@@ -31,11 +31,8 @@ class Home extends Component{
                         </li>
                         <li>
                             
-                            <a href="#">FAQ</a>
-                            <ul>
-                                <li><a href="#">Library access</a></li>
-                                <li><a href="#">User Experience</a></li>
-                            </ul>
+                            <a href="/login">Login</a>
+                            
 
                         </li>
                         <li className="nav pull-right"><a href="/">Register</a></li>

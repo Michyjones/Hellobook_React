@@ -13,12 +13,6 @@ describe('Register component', () => {
     const wrapper = shallow(<Register store={store} />).dive();
     expect(wrapper).toHaveLength(1);
   });
-
-  xit('Handles _register onsubmit', () => {
-    const _register = sinon.spy();
-    const wrapper = shallow(<Register onSubmit={_register} store={store} />);
-    wrapper.find('Form').simulate('submit');
-  });
 });
 
 describe('Login component', () => {

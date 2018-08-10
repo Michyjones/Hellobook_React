@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { loginUser } from "../actions/usersActions";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { redirect } from "../helpers/history"
-import {Redirect } from 'react-router'
+// import { redirect } from "../helpers/history"
+import {Redirect} from 'react-router';
+import { Link } from "react-router-dom";
 
 
 class Login extends Component {
@@ -124,9 +125,9 @@ class Login extends Component {
                         Login
                       </button>
                     </div>
-                    <a href="/" className="pull-right need-help">
+                    <Link to="/requestpassword" className="pull-right need-help">
                       Forgot password?{" "}
-                    </a>
+                    </Link>
                     <span className="clearfix" />
                   </form>
                 </div>

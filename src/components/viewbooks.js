@@ -73,6 +73,7 @@ class Views extends Component {
                           <th> Book Name</th>
                           <th className="hidden-xs">Category</th>
                           <th className="hidden-xs">Availability</th>
+                          <th className="fa fa-edit">Edit</th>
                 
                         </tr>
                       </thead>
@@ -97,9 +98,19 @@ class Views extends Component {
                                 <b className="text-danger">Not Available</b>
                               )}
                             </td>
+                            <td>
+                            <Link
+                                to={`/editbook/${book.id}`}
+                                className="btn btn-primary"
+                              >
+                                Edit <i className="fa fa-edit" />
+                              </Link>
+                           </td>
+                            
                           </tr>
                         ))}
                       </tbody>
+                      )}
                     </table>
                   )}
                 </div>
