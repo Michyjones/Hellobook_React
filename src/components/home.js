@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {Component, Fragment} from "react";
-// import Header from "./Header";
+import Header from "./Header";
 
 
 
@@ -9,8 +9,8 @@ class Home extends Component{
         return(
             <Fragment>
 
-
-                <nav>
+            <Header/>
+                {/* <nav>
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Category</a>
@@ -38,7 +38,7 @@ class Home extends Component{
                         <li className="nav pull-right"><a href="/">Register</a></li>
 
                     </ul>
-                </nav>
+                </nav> */}
 
                 <div className="welcome">
                     Hello Books Library

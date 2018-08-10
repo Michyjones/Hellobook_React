@@ -1,4 +1,4 @@
-import {BORROW_BOOK_SUCCESS,RETURN_BOOK_SUCCESS, BORROW_BOOK_FAILED, ERRORHANDLER} from "./actionTypes";
+import {BORROW_BOOK_SUCCESS,RETURN_BOOK_SUCCESS,ERRORHANDLER} from "./actionTypes";
 import axios from "axios";
 import { getSingleBook } from "../actions/bookActions";
 import swal from "sweetalert"
@@ -6,8 +6,6 @@ import { redirect } from "../helpers/history"
 
 
 const basePath =process.env.REACT_APP_base_path;
-const token = localStorage.getItem("token");
-
 
 export const borrowBook = data => {
     return dispatch => {

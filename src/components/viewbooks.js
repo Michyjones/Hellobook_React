@@ -2,11 +2,10 @@ import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import Header from "./Header";
-import { fetchBooks, getSingleBook } from "../actions/bookActions";
+import { fetchBooks} from "../actions/bookActions";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import JwPagination from "jw-react-pagination";
-import { Button } from "reactstrap";
 
 class Views extends Component {
   constructor(props) {
@@ -110,7 +109,7 @@ class Views extends Component {
                           </tr>
                         ))}
                       </tbody>
-                      )}
+                      
                     </table>
                   )}
                 </div>
