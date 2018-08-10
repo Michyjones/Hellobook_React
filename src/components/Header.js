@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "../App.css";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -24,15 +24,26 @@ class Header extends Component {
               <NavItem>
                 <Link to="/view">About</Link>
               </NavItem>
+              {this.props.user.loggedIn &&
+                <NavItem>
+                
+                  <Link to="/view">View Books</Link>
+                </NavItem>
+              }
             </Nav>
             <Nav pullRight>
+            {!this.props.user.loggedIn?
+            <Fragment>
               <NavItem>
                 <Link to="/login">Login</Link>
               </NavItem>
               <NavItem>
                 <Link to="/">Register</Link>
-                <button onClick={this.props.logoutUser}>Logout</button>
               </NavItem>
+              </Fragment>:
+              <NavItem>
+              <button onClick={this.props.logoutUser}>Logout</button>
+            </NavItem> }
             </Nav>
           </Navbar.Collapse>
         </Navbar>

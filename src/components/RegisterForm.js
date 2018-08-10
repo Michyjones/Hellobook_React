@@ -25,7 +25,7 @@ class Register extends Component {
 
   submitForm = () => {
     this.props.createNewUser(this.state.user);
-    this.props.history.push("/login");
+    
   };
 
   render() {

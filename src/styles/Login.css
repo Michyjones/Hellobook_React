@@ -8,6 +8,10 @@
 body {
   background: #f1f3fa;
 }
+#rowj {
+  margin-left: 200px;
+  margin-top: 50px;
+}
 /* Profile container */
 .profile {
   margin: 20px 0;
@@ -838,3 +842,4 @@ used to vertically center elements, may need modification if you're not using de
 .panel-table .panel-body .table-bordered > tbody > tr > td {
   line-height: 34px;
 }
+.center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}

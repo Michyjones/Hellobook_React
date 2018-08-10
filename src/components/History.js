@@ -4,15 +4,23 @@ import "../styles/Login.css";
 import Header from "./Header";
 import { getUserHistory } from "../actions/bookActions";
 import { connect } from "react-redux";
+import  JwPagination from "jw-react-pagination";
 
 class History extends Component {
   constructor() {
     super();
+    this.state={
+      pageBooks:[]
+  };
   }
   componentDidMount() {
     console.log("sdgsdgfsdfsd");
     this.props.getUserHistory();
   }
+    _onchangeBookpage= pageBooks => {
+      this.setState({pageBooks})
+  }
+
   render() {
     const { history } = this.props.history || [];
     return (
@@ -42,7 +50,7 @@ class History extends Component {
                 <div className="panel-heading">
                   <div className="row">
                     <div className="col col-xs-6">
-                      <h3 className="panel-title">Available books</h3>
+                      <h3 className="panel-title">Book History</h3>
                     </div>
                   </div>
                 </div>
@@ -53,7 +61,6 @@ class History extends Component {
                     <table className="table table-striped table-bordered table-list">
                       <thead>
                         <tr>
-                          <th>Book id</th>
                           <th className="hidden-xs">User Email</th>
                           <th> Date Borrowed</th>
                           <th className="hidden-xs">Date Returned</th>
@@ -61,10 +68,8 @@ class History extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {history.map(history => (
+                        {this.state.pageBooks.map(history => (
                           <tr>
-                            <td>{history.book_id}</td>
-
                             <td>{history.user_email}</td>
                             <td>{history.date_borrowed}</td>
 
@@ -81,6 +86,11 @@ class History extends Component {
                       </tbody>
                     </table>
                   )}
+                  <JwPagination
+                                        items={this.props.history.history}
+                                        pageSize={5}
+                                        onChangePage ={this._onchangeBookpage}
+                                        />
                 </div>
               </div>
             </div>

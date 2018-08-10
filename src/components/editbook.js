@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
-import { editBook, getSingleBook } from "../actions/bookActions";
 import { connect } from "react-redux";
 import Header from "./Header";
+import { editBook, getSingleBook,deleteBook } from "../actions/bookActions";
 
 class Editbook extends Component {
   constructor(props) {
@@ -19,6 +19,11 @@ class Editbook extends Component {
     this.setState({ book_id: book_id });
     this.props.getSingleBook({ book_id, token });
   };
+  _deleteBook = () => {
+    const token = this.props.user.token;
+    const book_id = this.props.match.params.id;
+    this.props.deleteBook({ token, book_id });
+  };
 
   submitForm = e => {
     e.preventDefault();
@@ -28,7 +33,6 @@ class Editbook extends Component {
     book["serial_no"] = this.value("serial_no");
     book["category"] = this.value("category");
     book["book_name"] = this.value("book_name");
-    console.log("tfsggagerueuw", book);
     this.props.editNewBook({ book, book_id });
     this.props.history.push("/view");
   };
@@ -128,7 +132,8 @@ class Editbook extends Component {
                 >
                   Update
                 </button>
-                <button pullRight type="button" className="btn btn-danger">
+                <button type="button" className="btn btn-danger pull-right"
+                onClick={this._deleteBook}>
                   Delete
                 </button>
               </div>
@@ -140,12 +145,13 @@ class Editbook extends Component {
   }
 }
 
-const mapStateToProps = state => ({ book: state.book });
+const mapStateToProps = state => ({ book: state.book, user: state.user  });
 
 const mapDispatchToProps = dispatch => {
   return {
     editNewBook: data => dispatch(editBook(data)),
-    getSingleBook: data => dispatch(getSingleBook(data))
+    getSingleBook: data => dispatch(getSingleBook(data)),
+    deleteBook: data => dispatch(deleteBook(data))
   };
 };
 

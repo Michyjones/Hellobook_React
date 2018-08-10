@@ -2,13 +2,14 @@ import {BORROW_BOOK_SUCCESS,RETURN_BOOK_SUCCESS, BORROW_BOOK_FAILED, ERRORHANDLE
 import axios from "axios";
 import { getSingleBook } from "../actions/bookActions";
 import swal from "sweetalert"
+import { redirect } from "../helpers/history"
 
-const basePath = "http://localhost:5000/api/v2";
+
+const basePath =process.env.REACT_APP_base_path;
 const token = localStorage.getItem("token");
 
 
 export const borrowBook = data => {
-    console.log(token)
     return dispatch => {
       let token = localStorage.getItem("token");
       return axios
@@ -20,11 +21,11 @@ export const borrowBook = data => {
           dispatch({ type: BORROW_BOOK_SUCCESS, Message });
           dispatch(getSingleBook(data.book_id));
           swal("Success",Message)
-        // this.props.history.push(`/books/${data}`);
+          redirect("/history");
+       
         })
         .catch(error => {
             const Message = error.response.data.Message;
-            console.log("errrrorrr", error.response)
           if (error.response.status === 404) {
             dispatch({
               type: ERRORHANDLER,
@@ -49,7 +50,6 @@ export const borrowBook = data => {
     };
   };
   export const returnBook = data => {
-    console.log(token)
     return dispatch => {
       let token = localStorage.getItem("token");
       return axios
@@ -61,12 +61,11 @@ export const borrowBook = data => {
           dispatch({ type: RETURN_BOOK_SUCCESS, Message });
           swal("Success", Message)
           dispatch(getSingleBook(data.book_id));
-        //this.props.history.push(`/books/${data}`);
+          redirect("/history");
         })
         .catch(error => {
             const Message = error.response.data.Message;
           if (error.response.status === 404) {
-            console.log(error.response);
             dispatch({
               type: ERRORHANDLER,
               data: error.response.data.Message || error.response.data.Error
@@ -74,7 +73,6 @@ export const borrowBook = data => {
             });
           }
           else if (error.response.status === 401) {
-            console.log(error.response);
             dispatch({
               type: ERRORHANDLER,
               data: error.response.data.Message || error.response.data.Error
