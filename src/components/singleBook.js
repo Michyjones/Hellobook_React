@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
+import { redirect } from "../helpers/history";
 import { Link } from "react-router-dom";
 import { getSingleBook } from "../actions/bookActions";
 import { borrowBook, returnBook } from "../actions/BorrowReturnActions";
@@ -38,7 +39,6 @@ class singleBook extends Component {
     this.props.getSingleBook({ book_id, token });
   };
   _borrowBook = () => {
-    // const book_id = this.props.book.details.id;
     const book_id = this.props.match.params.id;
     this.props.borrowBook({ book_id });
   };
@@ -57,7 +57,12 @@ class singleBook extends Component {
     this.props.editNewBook(this.state.book);
   };
   componentDidMount() {
+    
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
     this._getSingleBook();
+    
   }
 
   render() {
@@ -98,7 +103,7 @@ class singleBook extends Component {
                                     Return Book
                                   </DropdownItem>
                                   <DropdownItem>
-                                    <Link to="/history">History</Link>
+                                    <Link to="/history">Borrow History</Link>
                                   </DropdownItem>
                                 </DropdownMenu>
                               </Dropdown>
@@ -138,7 +143,7 @@ class singleBook extends Component {
   }
 }
 
-const mapStateToProps = state => ({ book: state.book });
+const mapStateToProps = state => ({ book: state.book , user: state.user});
 
 const mapDispatchToProps = dispatch => ({
   getSingleBook: data => dispatch(getSingleBook(data)),

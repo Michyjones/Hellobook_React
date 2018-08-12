@@ -4,22 +4,25 @@ import "../styles/Login.css";
 import Header from "./Header";
 import { getUserHistory } from "../actions/bookActions";
 import { connect } from "react-redux";
-import  JwPagination from "jw-react-pagination";
+import JwPagination from "jw-react-pagination";
+import { redirect } from "../helpers/history";
 
 class History extends Component {
   constructor() {
     super();
-    this.state={
-      pageBooks:[]
-  };
+    this.state = {
+      pageBooks: []
+    };
   }
   componentDidMount() {
-    console.log("sdgsdgfsdfsd");
     this.props.getUserHistory();
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
   }
-    _onchangeBookpage= pageBooks => {
-      this.setState({pageBooks})
-  }
+  _onchangeBookpage = pageBooks => {
+    this.setState({ pageBooks });
+  };
 
   render() {
     const { history } = this.props.history || [];
@@ -34,12 +37,11 @@ class History extends Component {
             </h1>
             <center>
               <p>
-                Edit book information and add the the books that are not in the
-                library. Also delete the outdated copies from the library{" "}
-              </p>
-              <p>
-                Inform us about the book that you would like to be in the store
-                and its not available at the moment
+                <strong>
+                  This are the books you have Borrowed from our catlog from the
+                  day you registered with us. All the book history is available
+                  here.
+                </strong>
               </p>
               <p />
               <p />
@@ -61,19 +63,23 @@ class History extends Component {
                     <table className="table table-striped table-bordered table-list">
                       <thead>
                         <tr>
-                          <th className="hidden-xs">User Email</th>
+                          <th>Book Name</th>
+                          <th>Category</th>
                           <th> Date Borrowed</th>
                           <th className="hidden-xs">Date Returned</th>
-                          <th className="hidden-xs">Status</th>
+                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {this.state.pageBooks.map(history => (
-                          <tr>
-                            <td>{history.user_email}</td>
+                        {this.state.pageBooks.map((history, index) => (
+                          <tr key={index}>
+                            <td>{history.book_name}</td>
+                            <td>{history.category}</td>
                             <td>{history.date_borrowed}</td>
 
-                            <td>{history.date_returned}</td>
+                            <td className="hidden-xs">
+                              {history.date_returned}
+                            </td>
                             <td>
                               {history.returned ? (
                                 <b className="text-success">Returned</b>
@@ -87,10 +93,10 @@ class History extends Component {
                     </table>
                   )}
                   <JwPagination
-                                        items={this.props.history.history}
-                                        pageSize={5}
-                                        onChangePage ={this._onchangeBookpage}
-                                        />
+                    items={this.props.history.history}
+                    pageSize={5}
+                    onChangePage={this._onchangeBookpage}
+                  />
                 </div>
               </div>
             </div>
@@ -102,7 +108,10 @@ class History extends Component {
 }
 
 const mapStateToProps = state => {
-  return { history: state.history };
+  return {
+    history: state.history,
+    user: state.user
+  };
 };
 
 const mapDispatchToProps = dispatch => ({

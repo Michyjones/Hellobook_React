@@ -6,6 +6,7 @@ import { fetchBooks} from "../actions/bookActions";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import JwPagination from "jw-react-pagination";
+import { redirect } from "../helpers/history";
 
 class Views extends Component {
   constructor(props) {
@@ -15,6 +16,10 @@ class Views extends Component {
     };
   }
   componentDidMount() {
+    
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
     this.props.fetchBooks();
   }
   _onchangeBookpage = pageBooks => {
@@ -72,13 +77,12 @@ class Views extends Component {
                           <th> Book Name</th>
                           <th className="hidden-xs">Category</th>
                           <th className="hidden-xs">Availability</th>
-                          <th className="fa fa-edit">Edit</th>
                 
                         </tr>
                       </thead>
                       <tbody>
                         {this.state.pageBooks.map(book => (
-                          <tr>
+                          <tr key={book.id}>
                             <td>
                               <Link
                                 to={`/book/${book.id}`}
@@ -98,13 +102,14 @@ class Views extends Component {
                               )}
                             </td>
                             <td>
+                              {this.props.user.IsAdmin &&
                             <Link
-                                to={`/editbook/${book.id}`}
-                                className="btn btn-primary"
-                              >
+                              to={`/editbook/${book.id}`}
+                              className="btn btn-primary"
+                            >
                                 Edit <i className="fa fa-edit" />
-                              </Link>
-                           </td>
+                            </Link>}
+                            </td>
                             
                           </tr>
                         ))}

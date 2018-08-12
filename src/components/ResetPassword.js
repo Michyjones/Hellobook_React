@@ -4,6 +4,8 @@ import { passwordReset } from "../actions/ResetPassword";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import Header from "./Header";
+import { redirect } from "../helpers/history";
+
 
 /**
  * This component render page for users to request password reset
@@ -24,6 +26,11 @@ class PasswordReset extends Component {
       visible: false
     });
   };
+  componentDidMount() {
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
+  }
 
   /**
    * Makes a server request to send an password reset link into user email
@@ -58,79 +65,79 @@ class PasswordReset extends Component {
                   onSubmit={this._resetPassword}
                 >
                   <div className="form-group">
-                      <label
-                        htmlFor="password"
-                        className="cols-sm-2 control-label"
-                      >
+                    <label
+                      htmlFor="old_password"
+                      className="cols-sm-2 control-label"
+                    >
                           Old Password
-                      </label>
-                      <div className="cols-sm-10">
-                        <div className="input-group">
-                          <span className="input-group-addon">
-                            <i
-                              className="fa fa-lock fa-lg"
-                              aria-hidden="true"
-                            />
-                          </span>
-                          <input
-                            type="password"
-                            name="old_password"
-                            className="form-control"
-                            placeholder="Enter Old Password"
-                            required
+                    </label>
+                    <div className="cols-sm-10">
+                      <div className="input-group">
+                        <span className="input-group-addon">
+                          <i
+                            className="fa fa-lock fa-lg"
+                            aria-hidden="true"
                           />
-                        </div>
+                        </span>
+                        <input
+                          type="password"
+                          name="old_password"
+                          className="form-control"
+                          placeholder="Enter Old Password"
+                          required
+                        />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="password"
-                        className="cols-sm-2 control-label"
-                      >
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="new_password"
+                      className="cols-sm-2 control-label"
+                    >
                         New Password
-                      </label>
-                      <div className="cols-sm-10">
-                        <div className="input-group">
-                          <span className="input-group-addon">
-                            <i
-                              className="fa fa-lock fa-lg"
-                              aria-hidden="true"
-                            />
-                          </span>
-                          <input
-                            type="password"
-                            name="new_password"
-                            className="form-control"
-                            placeholder="Enter New Password"
-                            required
+                    </label>
+                    <div className="cols-sm-10">
+                      <div className="input-group">
+                        <span className="input-group-addon">
+                          <i
+                            className="fa fa-lock fa-lg"
+                            aria-hidden="true"
                           />
-                        </div>
+                        </span>
+                        <input
+                          type="password"
+                          name="new_password"
+                          className="form-control"
+                          placeholder="Enter New Password"
+                          required
+                        />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label
-                        htmlFor="password"
-                        className="cols-sm-2 control-label"
-                      >
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="password"
+                      className="cols-sm-2 control-label"
+                    >
                         Confirm Password
-                      </label>
-                      <div className="cols-sm-10">
-                        <div className="input-group">
-                          <span className="input-group-addon">
-                            <i
-                              className="fa fa-lock fa-lg"
-                              aria-hidden="true"
-                            />
-                          </span>
-                          <input
-                            type="password"
-                            name="confirm_new_password"
-                            className="form-control"
-                            placeholder="Confirm New Password"
+                    </label>
+                    <div className="cols-sm-10">
+                      <div className="input-group">
+                        <span className="input-group-addon">
+                          <i
+                            className="fa fa-lock fa-lg"
+                            aria-hidden="true"
                           />
-                        </div>
+                        </span>
+                        <input
+                          type="password"
+                          name="confirm_new_password"
+                          className="form-control"
+                          placeholder="Confirm New Password"
+                        />
                       </div>
                     </div>
+                  </div>
                   <div className="form-group pull-right" id="submit">
                     <button type="submit" className="btn btn-primary">
                       Submit
