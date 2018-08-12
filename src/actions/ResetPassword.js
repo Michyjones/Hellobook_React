@@ -4,7 +4,6 @@ import swal from "sweetalert";
 const basePath = process.env.REACT_APP_base_path;
 const reset_url = `${basePath}/auth/reset-password`;
 const change_url = `${basePath}/auth/change-password`;
-const token = localStorage.getItem("token");
 
 /**
  * Request password reset link function
@@ -36,7 +35,6 @@ export const requestReset = data => {
   };
 };
 export const passwordReset = data => {
-    console.log(data)
   return dispatch => {
     axios.defaults.headers.common["Authorization"] = "Bearer "+ data.token;
     return axios
@@ -48,7 +46,6 @@ export const passwordReset = data => {
         }
       )
       .then(res => {
-          console.log(res.data)
         const Message = res.data.Message;
         dispatch({
           type: "RESET_PASSWORD_SUCCESS",
@@ -59,7 +56,6 @@ export const passwordReset = data => {
         swal("Success", Message);
       })
       .catch(error => {
-          console.log(error.response.data)
         if (error.response.status === 400) {
           const Message = "No user registered with this email.";
           dispatch({ type: "RESET_PASSWORD_FAIL", data: { Message } });
