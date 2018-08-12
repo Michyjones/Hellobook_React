@@ -15,8 +15,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { redirect } from "../helpers/history";
 
-
-const basePath =process.env.REACT_APP_base_path;
+const basePath = process.env.REACT_APP_base_path;
 const token = localStorage.getItem("token");
 
 export const addBook = book => {
@@ -46,7 +45,7 @@ export const editBook = data => {
       .then(result => {
         const Message = result.data.Message;
         dispatch({ type: EDIT_BOOK_SUCCESS, Message });
-        swal("Success",Message)
+        swal("Success", Message);
       })
       .catch(error => {
         if (error.response.status === 404) {
@@ -60,18 +59,15 @@ export const editBook = data => {
 };
 export const deleteBook = data => {
   return dispatch => {
-    let token = data.token;
-    axios.defaults.headers.common["Authorization"] = "Bearer "+ data.token;
+    let token = localStorage.getItem("token");
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     axios
-      .delete(`${basePath}/books/${data.book_id}`, {}, {
-      })
+      .delete(`${basePath}/books/${data.book_id}`, {}, {})
       .then(result => {
         const Message = result.data.Message;
-        dispatch({ type: DELETE_BOOK_SUCCESS, Message }); 
-        swal("Success",Message);
+        dispatch({ type: DELETE_BOOK_SUCCESS, Message });
+        swal("Success", Message);
         redirect("/view");
-
-
       })
       .catch(error => {
         const Message = error.response.data.Message;
@@ -80,7 +76,14 @@ export const deleteBook = data => {
             type: ERRORHANDLER,
             data: error.response.data.Message || error.response.data.Error
           });
-          swal( "Error",Message)
+          swal("Error", Message);
+        }
+        if (error.response.status === 409) {
+          dispatch({
+            type: ERRORHANDLER,
+            data: error.response.data.Message || error.response.data.Error
+          });
+          swal("Error", Message);
         }
       });
   };
@@ -111,7 +114,10 @@ export const getSingleBook = data => {
         dispatch({ type: GET_SINGLE_BOOK, data: res.data[0] });
       })
       .catch(error => {
-        // dispatch({type: ERRORHANDLER, error: error.response.data.Message || error.response.data.Error})
+        dispatch({
+          type: ERRORHANDLER,
+          error: error.response.data.Message || error.response.data.Error
+        });
       });
   };
 };

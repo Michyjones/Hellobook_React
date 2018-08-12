@@ -8,8 +8,9 @@ import {
   RESET_PASSWORD_FAIL
 } from "../actions/actionTypes";
 const initialState = {
-  loggedIn: localStorage.getItem("loggedIn"),
-  token: localStorage.getItem("token")
+  loggedIn: JSON.parse(localStorage.getItem("loggedIn")),
+  token: localStorage.getItem("token"),
+  IsAdmin: JSON.parse(localStorage.getItem("IsAdmin"))
 };
 
 export default (state = initialState, action) => {
@@ -19,15 +20,13 @@ export default (state = initialState, action) => {
         ...state,
         details: action.user
       };
-
     case LOGIN_USER_SUCCESS:
-      const { token, IsAdmin } = action.user;
-      const newState = Object.assign({}, state, {
+      return {
+        ...state,
         loggedIn: true,
-        details: token,
-        IsAdmin
-      });
-      return newState;
+        token: action.user.token,
+        IsAdmin: action.user.IsAdmin
+      };
 
     case LOGOUT_SUCCESS:
       return {
@@ -50,7 +49,7 @@ export default (state = initialState, action) => {
         ...state,
         Message: action.data.Message
       };
-      case RESET_PASSWORD_FAIL:
+    case RESET_PASSWORD_FAIL:
       return {
         ...state,
         Message: action.data.Message

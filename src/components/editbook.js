@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import { connect } from "react-redux";
 import Header from "./Header";
+import { redirect } from "../helpers/history";
 import { editBook, getSingleBook,deleteBook } from "../actions/bookActions";
 
 class Editbook extends Component {
@@ -27,7 +28,6 @@ class Editbook extends Component {
 
   submitForm = e => {
     e.preventDefault();
-    // console.log(this.state.book_id);
     const book = {};
     const book_id = this.props.match.params.id;
     book["serial_no"] = this.value("serial_no");
@@ -38,6 +38,9 @@ class Editbook extends Component {
   };
 
   componentDidMount() {
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
     this._getSingleBook();
   }
   Changes = e => {
@@ -133,7 +136,7 @@ class Editbook extends Component {
                   Update
                 </button>
                 <button type="button" className="btn btn-danger pull-right"
-                onClick={this._deleteBook}>
+                  onClick={this._deleteBook}>
                   Delete
                 </button>
               </div>

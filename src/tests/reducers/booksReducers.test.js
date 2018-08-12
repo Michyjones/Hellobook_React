@@ -31,24 +31,24 @@ describe("Login reducer", () => {
 });
 
 describe("Book reducer", () => {
-    it("should return the initial state", () => {
-      expect(book(undefined, {})).toEqual({
-        details: {} 
-      });
+  it("should return the initial state", () => {
+    expect(book(undefined, {})).toEqual({
+      details: {} 
     });
-    it("should handle GET_SINGLE_BOOK ", () => {
-      expect(
-        books(
-          {},
-          {
-            type: types.GET_SINGLE_BOOK
-          }
-        )
-      ).toEqual({
-        details: undefined
-      });
-    });
-  
   });
+  it("should handle GET_SINGLE_BOOK ", () => {
+    expect(
+      books(
+        {},
+        {
+          type: types.GET_SINGLE_BOOK
+        }
+      )
+    ).toEqual({
+      details: undefined
+    });
+  });
+  
+});
   
 

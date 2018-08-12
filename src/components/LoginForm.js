@@ -3,8 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { loginUser } from "../actions/usersActions";
 import { connect } from "react-redux";
 import Header from "./Header";
-// import { redirect } from "../helpers/history"
-import {Redirect} from 'react-router';
 import { Link } from "react-router-dom";
 
 
@@ -21,7 +19,7 @@ class Login extends Component {
     if(nextProps.user !== this.props.user){
       this.setState({loggedIn: nextProps.user.loggedIn});
     }
-  };
+  }
   
   updateUserState = (field, e) => {
     let newUserState = Object.assign({}, this.state.user);
@@ -36,9 +34,9 @@ class Login extends Component {
 
   render() {
     const { updateUserState, submitForm } = this;
-    const { user: { email, password }, loggedIn }= this.state;
+    const { user: { email, password }}= this.state;
     
-    return loggedIn ? <Redirect to="/view"/> : (
+    return (
       <Fragment>
         <Header />
         <div className="container">
@@ -132,15 +130,14 @@ class Login extends Component {
                   </form>
                 </div>
               </div>
-              <a href="/" className="text-center new-account">
+              <a href="/register" className="text-center new-account">
                 Create an account{" "}
               </a>
             </div>
           </div>
         </div>
       </Fragment>
-    );
-  }
+    );}
 }
 
 const mapStateToProps = state => ({ user: state.user });

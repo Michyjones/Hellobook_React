@@ -1,44 +1,44 @@
-import {GET_HISTORY, FETCHING_HISTORY_ERROR, GET_HISTORY_SUCCESS} from '../actions/actionTypes';
+import {GET_HISTORY, FETCHING_HISTORY_ERROR, GET_HISTORY_SUCCESS} from "../actions/actionTypes";
 
 const initialState = {
-    message:'',
-    error:false,
-    loading: false,
-    history: [],
+  message:"",
+  error:false,
+  loading: false,
+  history: [],
 
 };
 
 export default (state = initialState, action) => {
-    switch(action.type){
+  switch(action.type){
 
-        case GET_HISTORY :
+    case GET_HISTORY :
 
-            return {
-                ...state,
-                message:'Retrieving history',
-                error:false,
-                loading: true,
-                history: [],
-            };
-            case GET_HISTORY_SUCCESS :
+      return {
+        ...state,
+        message:"Retrieving history",
+        error:false,
+        loading: true,
+        history: [],
+      };
+    case GET_HISTORY_SUCCESS :
 
-            return {
-                ...state,
-                message:'Retrieving success',
-                error:false,
-                loading: false,
-                history: action.data || [],
-            };
-            case FETCHING_HISTORY_ERROR:
+      return {
+        ...state,
+        message:"Retrieving success",
+        error:false,
+        loading: false,
+        history: action.data || [],
+      };
+    case FETCHING_HISTORY_ERROR:
 
-            return {
-                ...state,
-                message:'Retrieving success',
-                error:true,
-                loading: false,
-                history: []
-            };
-        default:
-            return state;
-    }
-}
+      return {
+        ...state,
+        message:"Retrieving success",
+        error:true,
+        loading: false,
+        history: []
+      };
+    default:
+      return state;
+  }
+};
