@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
         // details: action.book
         message: action.Message
       };
-      case DELETE_BOOK_SUCCESS:
+    case DELETE_BOOK_SUCCESS:
       return {
         ...state,
         // details: action.book
