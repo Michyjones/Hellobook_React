@@ -42,7 +42,8 @@ class PasswordReset extends Component {
     const token = localStorage.getItem("token");
     const old_password = e.target.elements.old_password.value;
     const new_password = e.target.elements.new_password.value;
-    this.props.passwordReset({ old_password, new_password, token });
+    const confirm_password = e.target.elements.confirm_new_password.value;
+    this.props.passwordReset({ old_password, new_password, confirm_password, token });
     this.forceUpdate();
   };
 

@@ -39,10 +39,12 @@ export const passwordReset = data => {
     axios.defaults.headers.common["Authorization"] = "Bearer "+ data.token;
     return axios
       .post(
+        
         change_url,
         {
           old_password: data.old_password,
-          new_password: data.new_password
+          new_password: data.new_password,
+          confirm_password: data.confirm_password
         }
       )
       .then(res => {
@@ -56,9 +58,10 @@ export const passwordReset = data => {
         swal("Success", Message);
       })
       .catch(error => {
+        const Message = error.response.data.Error;
         if (error.response.status === 400) {
-          const Message = "No user registered with this email.";
           dispatch({ type: "RESET_PASSWORD_FAIL", data: { Message } });
+          swal("Error", Message);
         }
       });
   };
