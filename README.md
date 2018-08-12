@@ -8,34 +8,51 @@ tracking and renting books. With this application users are able to find and ren
 application also has an admin section where the admin can do things like add books, delete 
 books and modify book information.
 
-##Features
+## Features
 
-##User Features
+## User Features
+
 1.Users can create an account and log in
+
 2.Users can view books.
+
 3.Only Authenticated Users can borrow and return books.
+
 4.Only admin users should be able to add, modify and delete book information
+
 5.Users can view their profile and their borrowing history
 
-##Admin Features
+## Admin Features
 
 Admin can add a book to the system
 
 Admin can update book information in the system
+
 Admin remove a book from the system
+
 Install Instructions
+
 Pre-requisites: Node v10.4.0
+
 Clone this repository
 
-```https://github.com/brian-mecha/hello-books-React.git```
+```https://github.com/Michyjones/Hellobook_React.git```
+
 
 Install the apps dependencies by running npm install
+
 Open a terminal and cd into the cloned repository
-#Run 
+
+# Run 
+
 ```npm start```
-#Test
+
+# Test
+
 ```npm test```
+
 More info
 
-#Project Owner
+# Project Owner
+
 Michael Gitau
