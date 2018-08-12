@@ -27,15 +27,6 @@ describe("Login reducer", () => {
       books: []
     });
   });
-
-});
-
-describe("Book reducer", () => {
-  it("should return the initial state", () => {
-    expect(book(undefined, {})).toEqual({
-      details: {} 
-    });
-  });
   it("should handle GET_SINGLE_BOOK ", () => {
     expect(
       books(
@@ -48,7 +39,86 @@ describe("Book reducer", () => {
       details: undefined
     });
   });
-  
-});
-  
 
+  it("should handle Get book Fail", () => {
+    expect(
+      books(
+        {},
+        {
+          data: {
+            books: [],
+            error: true,
+            loading: false,
+            Message: "Fetching false."
+          },
+          type: types.FETCHING_BOOKS_ERROR
+        }
+      )
+    ).toEqual({
+      books: [],
+      error: true,
+      loading: false,
+      message: "Fetching false."
+    });
+  });
+});
+
+describe("Book reducer", () => {
+  it("should return the initial state", () => {
+    expect(book(undefined, {})).toEqual({
+      details: {}
+    });
+  });
+
+  it("should handle FETCHING_BOOKS ", () => {
+    expect(
+      book(
+        {},
+        {
+          type: types.ADD_BOOK_SUCCESS
+        }
+      )
+    ).toEqual({
+      details: undefined
+    });
+  });
+
+  it("should handle FETCHING_BOOKS ", () => {
+    expect(
+      book(
+        {},
+        {
+          type: types.EDIT_BOOK_SUCCESS
+        }
+      )
+    ).toEqual({
+      message: undefined
+    });
+  });
+
+  it("should handle FETCHING_BOOKS ", () => {
+    expect(
+      book(
+        {},
+        {
+          type: types.DELETE_BOOK_SUCCESS
+        }
+      )
+    ).toEqual({
+      message: undefined
+    });
+  });
+
+  it("should handle FETCHING_BOOKS ", () => {
+    expect(
+      book(
+        {},
+        {
+          type: types.ERRORHANDLER
+        }
+      )
+    ).toEqual({
+      error: undefined
+    });
+  });
+});

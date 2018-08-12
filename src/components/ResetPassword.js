@@ -33,9 +33,7 @@ class PasswordReset extends Component {
   }
 
   /**
-   * Makes a server request to send an password reset link into user email
-   * @param {string} email
-   * @return {string} message
+   * Makes a server request to send an password to user email
    */
   _resetPassword = e => {
     e.preventDefault();

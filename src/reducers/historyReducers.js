@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        message:"Retrieving success",
+        message:"Retrieving error",
         error:true,
         loading: false,
         history: []
