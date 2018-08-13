@@ -8,6 +8,7 @@ import {
 
 const initialState = { details: {} };
 
+// Book relate reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_SINGLE_BOOK:
@@ -25,13 +26,11 @@ export default (state = initialState, action) => {
     case EDIT_BOOK_SUCCESS:
       return {
         ...state,
-        // details: action.book
         message: action.Message
       };
     case DELETE_BOOK_SUCCESS:
       return {
         ...state,
-        // details: action.book
         message: action.Message
       };  
     case ERRORHANDLER:
