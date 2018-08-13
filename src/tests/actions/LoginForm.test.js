@@ -17,28 +17,42 @@ describe("login action tests", () => {
     moxios.uninstall(axios);
   });
 
-  const loginInput = {"email":"test@gmail.com", "passoword":"qwerty@123"};
+  const loginInput = { email: "test@gmail.com", passoword: "qwerty@123" };
 
   xit("creates ADD_RESPONSE_MESSAGE action after successfully login", done => {
-    moxios.stubRequest(() => {
+    moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
-        body: {
-          user:loginInput  
+        status: 200,
+        response: {
+          Message: "Logged in successfully",
+          username: "samkaris",
+          email: "sam@gmail.com",
+          is_admin: true,
+          access_token: "token......"
         }
       });
     });
 
     const expectedAction = [
       {
-        type: types.LOGIN_USER_SUCCESS,
-        body: {user:loginInput}
+        response: {
+          Message: "Logged in successfully",
+          username: "samkaris",
+          email: "sam@gmail.com",
+          is_admin: true,
+          access_token: "token......"
+        },
+        type: types.LOGIN_USER_SUCCESS
       }
     ];
 
-    const store = mockStore({ user: loginInput }, expectedAction);
-    store.dispatch(loginUser());
-    done();
+    const store = mockStore({ user: {} });
+    // return store.dispatch(loginUser({loginInput}));
+    return store.dispatch(loginUser(loginInput)).then(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+      done();
+    });
   });
 
   xit("creates ADD_RESPONSE_MESSAGE action after successfully login", done => {

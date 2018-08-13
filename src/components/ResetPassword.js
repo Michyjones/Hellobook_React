@@ -33,16 +33,15 @@ class PasswordReset extends Component {
   }
 
   /**
-   * Makes a server request to send an password reset link into user email
-   * @param {string} email
-   * @return {string} message
+   * Makes a server request to send an password to user email
    */
   _resetPassword = e => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const old_password = e.target.elements.old_password.value;
     const new_password = e.target.elements.new_password.value;
-    this.props.passwordReset({ old_password, new_password, token });
+    const confirm_password = e.target.elements.confirm_new_password.value;
+    this.props.passwordReset({ old_password, new_password, confirm_password, token });
     this.forceUpdate();
   };
 

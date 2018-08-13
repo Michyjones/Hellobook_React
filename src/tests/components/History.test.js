@@ -21,7 +21,7 @@ describe("Header component", () => {
   });
 });
 
-describe("Request Passwordc omponent", () => {
+describe("Request Password component", () => {
   it("Renders request Password component", () => {
     const wrapper = shallow(<RequestPassword store={store} />).dive();
     expect(wrapper).toHaveLength(1);

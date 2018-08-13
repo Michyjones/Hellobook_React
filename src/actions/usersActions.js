@@ -19,8 +19,8 @@ export const createUser = (user) => {
     })
   );
 };
-export const loginUser = (user) => {
-
+export const loginUser = user => {
+  
   return dispatch => {
     return axios.post(`${basePath}/auth/login`, user).then( user => {
       const token = user.data.token;
