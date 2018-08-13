@@ -4,6 +4,7 @@ import { store } from "../../store/index";
 import Views from "../../components/viewbooks";
 import singleBook from "../../components/singleBook";
 
+// This renders SingleBook component
 describe("SingleBook component", () => {
   const param = {
     params: {
@@ -15,6 +16,7 @@ describe("SingleBook component", () => {
     expect(wrapper).toHaveLength(1);
   });
 });
+// This renders all book component
 describe("Books component", () => {
   it("Renders all book component", () => {
     const wrapper = shallow(<Views store={store} />);
@@ -22,11 +24,5 @@ describe("Books component", () => {
   });
 });
 
-// describe('Book component', () => {
-//   it('Renders book component', () => {
-//     const wrapper = shallow(<singleBook store={store} />);
-//     expect(wrapper).toHaveLength(1);
-//   });
-// });
 
 

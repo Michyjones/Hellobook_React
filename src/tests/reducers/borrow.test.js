@@ -2,6 +2,7 @@
 import borrow from "../../reducers/borrowreturnReducers";
 import * as types from "../../actions/actionTypes";
 
+// This tests the fetching history reducers
 describe("Login reducer", () => {
   it("should return the initial state", () => {
     expect(borrow(undefined, {})).toEqual({
