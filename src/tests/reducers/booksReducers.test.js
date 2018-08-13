@@ -3,6 +3,7 @@ import books from "../../reducers/booksReducer";
 import book from "../../reducers/bookReducers";
 import * as types from "../../actions/actionTypes";
 
+// This tests the fetching book reducers
 describe("Login reducer", () => {
   it("should return the initial state", () => {
     expect(books(undefined, {})).toEqual({

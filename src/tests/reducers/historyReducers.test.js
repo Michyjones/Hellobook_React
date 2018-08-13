@@ -1,4 +1,3 @@
-/* import expect from 'expect';**/
 import history from "../../reducers/historyReducers";
 import * as types from "../../actions/actionTypes";
 

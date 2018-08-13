@@ -5,6 +5,9 @@ import { addBook } from "../actions/bookActions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Header from "./Header";
+import { redirect } from "../helpers/history";
+
+// This component render create book page
 
 class Createbook extends Component {
   state = {
@@ -16,18 +19,24 @@ class Createbook extends Component {
     }
   };
 
+  // Makes a request to the server to create a book
   updateBookState = (field, e) => {
     let newBookState = Object.assign({}, this.state.book);
     newBookState[field] = e.target.value;
     this.setState({ book: newBookState });
   };
-
+  // This send request to post a a new book on
   submitForm = e => {
     e.preventDefault();
     this.props.addNewBook(this.state.book);
     this.props.history.push("/view");
   };
-
+  // This protects the page from been assessed by unlogged in users
+  componentDidMount() {
+    if (!this.props.user.loggedIn) {
+      redirect("/login");
+    }
+  }
   render() {
     const { updateBookState, submitForm } = this;
     const { serial_no, book_name, category } = this.state.book;
@@ -119,7 +128,8 @@ class Createbook extends Component {
   }
 }
 
-const mapStateToProps = state => ({ book: state.book });
+// Map store state to props
+const mapStateToProps = state => ({ book: state.book,  user: state.user  });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(

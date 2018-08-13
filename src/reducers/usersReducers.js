@@ -12,7 +12,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   IsAdmin: JSON.parse(localStorage.getItem("IsAdmin"))
 };
-
+// User authentication /reset and change password reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_USER_SUCCESS:

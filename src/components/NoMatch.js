@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {Component} from "react";
 import "../styles/Login.css";
 
-
+// this component renders the page not found
 class NoMatch extends Component{
   render() {
     return(

@@ -4,6 +4,8 @@ import swal from "sweetalert";
 import { redirect } from "../helpers/history";
 
 const basePath = process.env.REACT_APP_base_path;
+
+// This function logs out from the library
 export const logoutUser = data => {
   return dispatch => {
     return axios

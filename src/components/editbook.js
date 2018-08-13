@@ -4,7 +4,7 @@ import "../styles/Login.css";
 import { connect } from "react-redux";
 import Header from "./Header";
 import { redirect } from "../helpers/history";
-import { editBook, getSingleBook,deleteBook } from "../actions/bookActions";
+import { editBook, getSingleBook, deleteBook } from "../actions/bookActions";
 
 class Editbook extends Component {
   constructor(props) {
@@ -13,19 +13,20 @@ class Editbook extends Component {
       edited: {}
     };
   }
-
+  // This send request to get  a single book on the library
   _getSingleBook = () => {
     const book_id = this.props.match.params.id;
     const token = localStorage.getItem("token");
     this.setState({ book_id: book_id });
     this.props.getSingleBook({ book_id, token });
   };
+  // This send request to delete book in the library
   _deleteBook = () => {
     const token = this.props.user.token;
     const book_id = this.props.match.params.id;
     this.props.deleteBook({ token, book_id });
   };
-
+  // This send request to edit  a book on the library
   submitForm = e => {
     e.preventDefault();
     const book = {};
@@ -36,13 +37,14 @@ class Editbook extends Component {
     this.props.editNewBook({ book, book_id });
     this.props.history.push("/view");
   };
-
+  // This protects the page from been assessed by unlogged in users
   componentDidMount() {
     if (!this.props.user.loggedIn) {
       redirect("/login");
     }
     this._getSingleBook();
   }
+  // This sets the new state of the book after edit
   Changes = e => {
     const val = {};
     const edited = this.state.edited;
@@ -135,8 +137,11 @@ class Editbook extends Component {
                 >
                   Update
                 </button>
-                <button type="button" className="btn btn-danger pull-right"
-                  onClick={this._deleteBook}>
+                <button
+                  type="button"
+                  className="btn btn-danger pull-right"
+                  onClick={this._deleteBook}
+                >
                   Delete
                 </button>
               </div>
@@ -147,8 +152,8 @@ class Editbook extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({ book: state.book, user: state.user  });
+// Map store state to props
+const mapStateToProps = state => ({ book: state.book, user: state.user });
 
 const mapDispatchToProps = dispatch => {
   return {

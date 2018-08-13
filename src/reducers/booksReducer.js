@@ -10,7 +10,7 @@ const initialState = {
   loading: false,
   books: []
 };
-
+// Fecthing book/books reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_BOOKS:

@@ -6,7 +6,8 @@ import { redirect } from "../helpers/history";
 
 const basePath =process.env.REACT_APP_base_path;
 
-
+//This function register a new user to the library
+ 
 export const createUser = (user) => {
 
   return (dispatch) => (
@@ -19,6 +20,8 @@ export const createUser = (user) => {
     })
   );
 };
+
+//This function logs in  a user into the library
 export const loginUser = user => {
   
   return dispatch => {

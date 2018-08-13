@@ -6,7 +6,7 @@ import { redirect } from "../helpers/history";
 
 
 const basePath =process.env.REACT_APP_base_path;
-
+// This function borrows books from the library
 export const borrowBook = data => {
   return dispatch => {
     let token = localStorage.getItem("token");
@@ -47,6 +47,7 @@ export const borrowBook = data => {
       });
   };
 };
+// This function returns borrowed books to the library
 export const returnBook = data => {
   return dispatch => {
     let token = localStorage.getItem("token");

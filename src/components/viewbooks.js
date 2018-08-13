@@ -2,12 +2,13 @@ import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import Header from "./Header";
-import { fetchBooks} from "../actions/bookActions";
+import { fetchBooks } from "../actions/bookActions";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import JwPagination from "jw-react-pagination";
 import { redirect } from "../helpers/history";
 
+// This component renders view all books page
 class Views extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +16,8 @@ class Views extends Component {
       pageBooks: []
     };
   }
+  // This protects the page from been assessed by unlogged in users
   componentDidMount() {
-    
     if (!this.props.user.loggedIn) {
       redirect("/login");
     }
@@ -59,7 +60,9 @@ class Views extends Component {
                     {this.props.user.IsAdmin && (
                       <div className="col col-xs-6 text-right">
                         <Link to="/addbook">
-                          <button type="button" className="btn btn-primary">Add New Book</button>
+                          <button type="button" className="btn btn-primary">
+                            Add New Book
+                          </button>
                         </Link>
                       </div>
                     )}
@@ -77,7 +80,6 @@ class Views extends Component {
                           <th> Book Name</th>
                           <th className="hidden-xs">Category</th>
                           <th className="hidden-xs">Availability</th>
-                
                         </tr>
                       </thead>
                       <tbody>
@@ -102,19 +104,18 @@ class Views extends Component {
                               )}
                             </td>
                             <td>
-                              {this.props.user.IsAdmin &&
-                            <Link
-                              to={`/editbook/${book.id}`}
-                              className="btn btn-primary"
-                            >
-                                Edit <i className="fa fa-edit" />
-                            </Link>}
+                              {this.props.user.IsAdmin && (
+                                <Link
+                                  to={`/editbook/${book.id}`}
+                                  className="btn btn-primary"
+                                >
+                                  Edit <i className="fa fa-edit" />
+                                </Link>
+                              )}
                             </td>
-                            
                           </tr>
                         ))}
                       </tbody>
-                      
                     </table>
                   )}
                 </div>

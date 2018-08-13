@@ -5,6 +5,7 @@ import { createUser } from "../actions/usersActions";
 import { bindActionCreators } from "redux";
 import Header from "./Header";
 
+// This component renders the register page
 class Register extends Component {
   state = {
     user: {
@@ -16,7 +17,7 @@ class Register extends Component {
       confirm_password: ""
     }
   };
-
+  // Makes a request to the server to register a new user
   updateUserState = (field, e) => {
     let newUserState = Object.assign({}, this.state.user);
     newUserState[field] = e.target.value;
@@ -25,7 +26,6 @@ class Register extends Component {
 
   submitForm = () => {
     this.props.createNewUser(this.state.user);
-    
   };
 
   render() {
@@ -196,6 +196,7 @@ class Register extends Component {
   }
 }
 
+// Map store state to props
 const mapStateToProps = state => ({ user: state.user });
 
 const mapDispatchToProps = dispatch => {

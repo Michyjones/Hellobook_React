@@ -5,9 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import Header from "./Header";
 
-/**
- * This component render page for users to request password reset
- */
+//  This component render request password reset page
+
 class RequestPassword extends Component {
   constructor() {
     super();
@@ -16,20 +15,16 @@ class RequestPassword extends Component {
     };
   }
 
-  /**
-   * The function closes the alert box
-   */
+  //  The function closes the alert box
+
   _onDismiss = () => {
     this.setState({
       visible: false
     });
   };
 
-  /**
-   * Makes a server request to send an password reset link into user email
-   * @param {string} email
-   * @return {string} message
-   */
+  //  Makes a server request to send an password reset  into user email
+
   _requestReset = e => {
     e.preventDefault();
     const email = e.target.elements.email.value;
@@ -92,7 +87,7 @@ class RequestPassword extends Component {
     event.preventDefault();
   }
 }
-
+// Map store state to props
 const mapStateToProps = state => {
   return {
     user: state.user
