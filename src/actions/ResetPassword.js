@@ -1,5 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert";
+import { redirect } from "../helpers/history";
 
 const basePath = process.env.REACT_APP_base_path;
 const reset_url = `${basePath}/auth/reset-password`;
@@ -57,6 +58,7 @@ export const passwordReset = data => {
           }
         });
         swal("Success", Message);
+        redirect("/view");
       })
       .catch(error => {
         const Message = error.response.data.Error;

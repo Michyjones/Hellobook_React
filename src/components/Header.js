@@ -88,7 +88,7 @@ class Header extends Component {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Profile <span className="fa fa fa-user" />
+                  Profile <span className="fa fa fa-user fa-lg" />
                 </a>
                 <ul className="dropdown-menu">
                   <li>
