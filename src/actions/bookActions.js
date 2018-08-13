@@ -18,6 +18,7 @@ import { redirect } from "../helpers/history";
 const basePath = process.env.REACT_APP_base_path;
 const token = localStorage.getItem("token");
 
+// This function  Adds a book in the library
 export const addBook = book => {
   return dispatch => {
     let token = localStorage.getItem("token");
@@ -35,6 +36,8 @@ export const addBook = book => {
       });
   };
 };
+
+// This function  edits an existing  book in the library
 export const editBook = data => {
   return dispatch => {
     let token = localStorage.getItem("token");
@@ -57,6 +60,7 @@ export const editBook = data => {
       });
   };
 };
+// This function  deletess an existing  book in the library
 export const deleteBook = data => {
   return dispatch => {
     let token = localStorage.getItem("token");
@@ -88,6 +92,7 @@ export const deleteBook = data => {
       });
   };
 };
+// This function  retrieves all the books in the library
 export const fetchBooks = dispatch => {
   dispatch({ type: FETCHING_BOOKS });
   let token = localStorage.getItem("token");
@@ -104,6 +109,7 @@ export const fetchBooks = dispatch => {
     });
 };
 
+// This function  retrieves a single book in the library
 export const getSingleBook = data => {
   return dispatch => {
     axios
@@ -121,6 +127,7 @@ export const getSingleBook = data => {
       });
   };
 };
+// This function  retrieves all borrowed books by a user in the library
 export const getUserHistory = dispatch => {
   dispatch({ type: GET_HISTORY });
   axios

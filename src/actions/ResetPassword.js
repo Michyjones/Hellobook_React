@@ -5,11 +5,9 @@ const basePath = process.env.REACT_APP_base_path;
 const reset_url = `${basePath}/auth/reset-password`;
 const change_url = `${basePath}/auth/change-password`;
 
-/**
- * Request password reset link function
- * @param{Email} - user registered email
- * @returns{String} - Message
- */
+
+//This function request password reset via email
+ 
 export const requestReset = data => {
   return dispatch => {
     return axios
@@ -34,6 +32,9 @@ export const requestReset = data => {
       });
   };
 };
+
+//This function changes password when user is logged in
+ 
 export const passwordReset = data => {
   return dispatch => {
     axios.defaults.headers.common["Authorization"] = "Bearer "+ data.token;
