@@ -2,10 +2,8 @@ import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.css";
 import { redirect } from "../helpers/history";
-import { Link } from "react-router-dom";
 import { getSingleBook } from "../actions/bookActions";
 import { borrowBook, returnBook } from "../actions/BorrowReturnActions";
-
 import {
   Dropdown,
   DropdownMenu,
@@ -15,6 +13,7 @@ import {
 import { connect } from "react-redux";
 import Header from "./Header";
 
+// This component renders to the single book page
 class singleBook extends Component {
   constructor(props) {
     super(props);
@@ -33,19 +32,26 @@ class singleBook extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   };
+
+  // This send request to get  a single book on the library
   _getSingleBook = () => {
     const book_id = this.props.match.params.id;
     const token = localStorage.getItem("token");
     this.props.getSingleBook({ book_id, token });
   };
+
+  // This send request to borrow book fromthe library
   _borrowBook = () => {
     const book_id = this.props.match.params.id;
     this.props.borrowBook({ book_id });
   };
+  // This send request to returns a borrowed to the library
+
   _returnBook = () => {
     const book_id = this.props.match.params.id;
     this.props.returnBook({ book_id });
   };
+
   updateBookState = (field, e) => {
     let newBookState = Object.assign({}, this.state.book);
     newBookState[field] = e.target.value;
@@ -56,13 +62,12 @@ class singleBook extends Component {
     e.preventDefault();
     this.props.editNewBook(this.state.book);
   };
+  // This protects the page from been assessed by unlogged in users
   componentDidMount() {
-    
     if (!this.props.user.loggedIn) {
       redirect("/login");
     }
     this._getSingleBook();
-    
   }
 
   render() {
@@ -94,17 +99,17 @@ class singleBook extends Component {
                                 <DropdownToggle caret color="success">
                                   Book Actions
                                 </DropdownToggle>
-                                <DropdownMenu>
-                                  <DropdownItem onClick={this._borrowBook}>
-                                    Borrow Book
-                                  </DropdownItem>
 
-                                  <DropdownItem onClick={this._returnBook}>
-                                    Return Book
-                                  </DropdownItem>
-                                  <DropdownItem>
-                                    <Link to="/history">Borrow History</Link>
-                                  </DropdownItem>
+                                <DropdownMenu>
+                                  {book.availabilty ? (
+                                    <DropdownItem onClick={this._borrowBook}>
+                                      Borrow Book
+                                    </DropdownItem>
+                                  ) : (
+                                    <DropdownItem onClick={this._returnBook}>
+                                      Return Book
+                                    </DropdownItem>
+                                  )}
                                 </DropdownMenu>
                               </Dropdown>
                             </th>
@@ -124,8 +129,7 @@ class singleBook extends Component {
                                 <b className="text-danger">Not Available</b>
                               )}
                             </td>
-                            <td>
-                            </td>
+                            <td />
                           </tr>
                         </tbody>
                       </table>
@@ -142,8 +146,8 @@ class singleBook extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({ book: state.book , user: state.user});
+// Map store state to props
+const mapStateToProps = state => ({ book: state.book, user: state.user });
 
 const mapDispatchToProps = dispatch => ({
   getSingleBook: data => dispatch(getSingleBook(data)),

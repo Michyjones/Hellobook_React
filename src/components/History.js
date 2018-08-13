@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import JwPagination from "jw-react-pagination";
 import { redirect } from "../helpers/history";
 
+// This component render book history page
 class History extends Component {
   constructor() {
     super();
@@ -14,12 +15,14 @@ class History extends Component {
       pageBooks: []
     };
   }
+  // This protects the page from been assessed by unloggd in users
   componentDidMount() {
     this.props.getUserHistory();
     if (!this.props.user.loggedIn) {
       redirect("/login");
     }
   }
+  // This handle pagination on the history page
   _onchangeBookpage = pageBooks => {
     this.setState({ pageBooks });
   };
@@ -107,6 +110,7 @@ class History extends Component {
   }
 }
 
+// Map store state to props
 const mapStateToProps = state => {
   return {
     history: state.history,

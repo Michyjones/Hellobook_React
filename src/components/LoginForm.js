@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 
-
+// This component render the login page
 class Login extends Component {
   state = {
     user: {
@@ -20,7 +20,7 @@ class Login extends Component {
       this.setState({loggedIn: nextProps.user.loggedIn});
     }
   }
-  
+  // Makes a request to the server to login a user
   updateUserState = (field, e) => {
     let newUserState = Object.assign({}, this.state.user);
     newUserState[field] = e.target.value;
@@ -139,7 +139,7 @@ class Login extends Component {
       </Fragment>
     );}
 }
-
+// Map store state to props
 const mapStateToProps = state => ({ user: state.user });
 
 const mapDispatchToProps = dispatch => {

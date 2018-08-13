@@ -6,10 +6,8 @@ import "../styles/Login.css";
 import Header from "./Header";
 import { redirect } from "../helpers/history";
 
+//  This component render to change password page
 
-/**
- * This component render page for users to request password reset
- */
 class PasswordReset extends Component {
   constructor() {
     super();
@@ -18,30 +16,36 @@ class PasswordReset extends Component {
     };
   }
 
-  /**
-   * The function closes the alert box
-   */
+  // The function closes the alert box
+
   _onDismiss = () => {
     this.setState({
       visible: false
     });
   };
+  // This protects the page from been assessed by unlogged in users
+
   componentDidMount() {
     if (!this.props.user.loggedIn) {
       redirect("/login");
     }
   }
 
-  /**
-   * Makes a server request to send an password to user email
-   */
+ 
+  //  Makes a server request to change password
+ 
   _resetPassword = e => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const old_password = e.target.elements.old_password.value;
     const new_password = e.target.elements.new_password.value;
     const confirm_password = e.target.elements.confirm_new_password.value;
-    this.props.passwordReset({ old_password, new_password, confirm_password, token });
+    this.props.passwordReset({
+      old_password,
+      new_password,
+      confirm_password,
+      token
+    });
     this.forceUpdate();
   };
 
@@ -68,15 +72,12 @@ class PasswordReset extends Component {
                       htmlFor="old_password"
                       className="cols-sm-2 control-label"
                     >
-                          Old Password
+                      Old Password
                     </label>
                     <div className="cols-sm-10">
                       <div className="input-group">
                         <span className="input-group-addon">
-                          <i
-                            className="fa fa-lock fa-lg"
-                            aria-hidden="true"
-                          />
+                          <i className="fa fa-lock fa-lg" aria-hidden="true" />
                         </span>
                         <input
                           type="password"
@@ -93,15 +94,12 @@ class PasswordReset extends Component {
                       htmlFor="new_password"
                       className="cols-sm-2 control-label"
                     >
-                        New Password
+                      New Password
                     </label>
                     <div className="cols-sm-10">
                       <div className="input-group">
                         <span className="input-group-addon">
-                          <i
-                            className="fa fa-lock fa-lg"
-                            aria-hidden="true"
-                          />
+                          <i className="fa fa-lock fa-lg" aria-hidden="true" />
                         </span>
                         <input
                           type="password"
@@ -118,15 +116,12 @@ class PasswordReset extends Component {
                       htmlFor="password"
                       className="cols-sm-2 control-label"
                     >
-                        Confirm Password
+                      Confirm Password
                     </label>
                     <div className="cols-sm-10">
                       <div className="input-group">
                         <span className="input-group-addon">
-                          <i
-                            className="fa fa-lock fa-lg"
-                            aria-hidden="true"
-                          />
+                          <i className="fa fa-lock fa-lg" aria-hidden="true" />
                         </span>
                         <input
                           type="password"
@@ -156,6 +151,7 @@ class PasswordReset extends Component {
   }
 }
 
+// Map store state to props
 const mapStateToProps = state => {
   return {
     user: state.user
