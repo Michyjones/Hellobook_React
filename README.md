@@ -31,7 +31,23 @@ Admin can update book information in the system
 
 Admin remove a book from the system
 
-Install Instructions
+# Install Instructions
+Installation and setup locally
+
+# Backend Flask API
+
+Create python virtual environment and clone the API from link above following instruction in it's documentation.
+
+```
+python3 -m venv env
+source ./env/bin/activate 
+git clone https://github.com/Michyjones/hello_books_API_DB.git 
+set global environments and to run the application locally use python run.py
+```
+# Online links
+Heroku link: ```https://hellobookreactjs.herokuapp.com```
+Documentation:
+```https://hellobookdb.docs.apiary.io```
 
 Pre-requisites: Node v10.4.0
 
